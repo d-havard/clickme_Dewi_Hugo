@@ -1,0 +1,40 @@
+html, body {
+    height: 98%;
+}
+
+body{
+    margin: 10px;
+}
+
+#jeu{
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px 100px;
+    gap:10px;
+    width:100%;
+    height:100%;
+}
+
+.cible{
+    border-radius: 50px;
+    border:1px solid;
+    cursor:pointer;
+    background-color: lightgrey;
+    opacity: 0.5;
+}
+
+.clickme{
+    background-color: green;
+    opacity: 1;
+}
+
+#gagne{
+    height: 1.5em;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+#conteneur{
+    display: flex;
+    justify-content: space-between;
+}
