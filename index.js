@@ -26,6 +26,11 @@ io.on("connection", (socket) => {
   socket.emit('initialise', partie.nombreCibles);
   socket.emit('nouvelle-cible', partie.numeroCible);
 
+  // Ajoute une joueur à la partie
+  partie.nouveauJoueur(socket.id);
+  // Informe les clients
+  io.emit('maj-joueurs', partie.joueurs);
+
   // On écoute des évènements sur le socket
   socket.on('click-cible',  (numeroCible) => {
     if (numeroCible == partie.numeroCible){
@@ -36,6 +41,11 @@ io.on("connection", (socket) => {
       socket.emit('gagne');
     }
   });
+
+  socket.on('disconnect', () => {
+    console.log(`le joueur ${socket.id} s'est déconnecté`);
+  });
+
 });
 
 // Lance le serveur.

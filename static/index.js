@@ -48,3 +48,13 @@ socket.on('nouvelle-cible', function(numeroCible){
 socket.on('gagne', function(){
     gagneDiv.textContent = "Gagné!";
 });
+
+
+socket.on('maj-joueurs',function (joueurs){
+    joueursTable.innerHTML = '';
+    for(const joueur of joueurs){
+        const ligne = joueursTable.insertRow();
+        let nomTd = ligne.insertCell();
+        nomTd.textContent = joueur.nom;
+    }
+});
