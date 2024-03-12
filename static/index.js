@@ -47,6 +47,7 @@ socket.on('nouvelle-cible', function(numeroCible){
 
 socket.on('gagne', function(){
     gagneDiv.textContent = "Gagné!";
+    
 });
 
 

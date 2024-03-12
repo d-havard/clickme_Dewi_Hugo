@@ -56,6 +56,24 @@ export class Partie {
     getJoueurById(socketId){
         return this.joueurs.find((joueur) => joueur.socketId == socketId);
     }
+
+    /**
+     * Retourne le score du joueur ayant le s...;
+     * @param {string} socketId 
+     */
+    getScoreJoueur(socketId){
+        this.getJoueurById(socketId).score;
+    }
+
+    /**
+     * Un joueur a cliqué sur la bonne cible
+     * @param {string} socketId 
+     */
+    gagne(socketId){
+        partie.nouvelleCible();
+        let joueur = partie.getJoueurById(socketId);
+        joueur.incrementeScore();
+    }
 }
 
 
@@ -73,7 +91,11 @@ class Joueur {
     constructor(socketId, nom){
         this.nom = nom;
         this.socketId = socketId;
+        this.score = 0;
     }
 
+    incrementeScore() {
+        this.score = this.score + 1;
+    }
 }
 
