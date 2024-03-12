@@ -10,6 +10,6 @@ Le projet est en [node.js](https://nodejs.org/en) avec les frameworks [expressjs
 
 ## Documentation de déploiment local
 
-- Installer node JS
-- Installer npm
+- Installer [node.js](https://nodejs.org/en)
+- Installer npm -> npm install
 - Demarrer avec "npx nodemon index.js"
