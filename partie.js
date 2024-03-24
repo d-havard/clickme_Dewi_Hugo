@@ -62,7 +62,13 @@ export class Partie {
      * @param {string} socketId 
      */
     getScoreJoueur(socketId){
-        this.getJoueurById(socketId).score;
+        let joueur = this.getJoueurById(socketId);
+        return joueur.score;
+    }
+
+    getJoueur(socketId){
+        let joueur = this.getJoueurById(socketId);
+        return joueur.nom
     }
 
     /**
@@ -70,8 +76,8 @@ export class Partie {
      * @param {string} socketId 
      */
     gagne(socketId){
-        partie.nouvelleCible();
-        let joueur = partie.getJoueurById(socketId);
+        this.nouvelleCible();
+        let joueur = this.getJoueurById(socketId);
         joueur.incrementeScore();
     }
 }

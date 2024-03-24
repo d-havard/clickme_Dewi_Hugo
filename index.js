@@ -35,7 +35,8 @@ io.on("connection", (socket) => {
   socket.on('click-cible',  (numeroCible) => {
     if (numeroCible == partie.numeroCible){
       partie.gagne(socket.id);
-      console.log(`Le score du joueur ${socket.id} est de ${partie.getScoreJoueur(socket.id)}`);
+      
+      console.log(`Le score du joueur ${partie.getJoueur(socket.id)} est de ${partie.getScoreJoueur(socket.id)}`);
       // Envoie le message 'nouvelle-cible à tous les sockets.
       io.emit('nouvelle-cible', partie.numeroCible);
       // Envoie le message 'gagne' seulement à ce socket.
