@@ -1,6 +1,7 @@
 const socket = io();
 const jeuxDiv = document.getElementById('jeu');
 const gagneDiv = document.getElementById('gagne');
+const scoreDiv = document.getElementById('score')
 const joueursTable = document.getElementById('tableau-joueurs');
 
 // Gère le click sur une cible
@@ -45,8 +46,9 @@ socket.on('nouvelle-cible', function(numeroCible){
     gagneDiv.textContent = "";
 });
 
-socket.on('gagne', function(){
-    gagneDiv.textContent = "Gagné! ";
+socket.on('gagne', function(getScoreJoueur){
+    gagneDiv.textContent = "Gagné!";
+    scoreDiv.textContent = `Votre score est de ${getScoreJoueur}`
 });
 
 
