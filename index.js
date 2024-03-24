@@ -39,6 +39,8 @@ io.on("connection", (socket) => {
       io.emit('nouvelle-cible', partie.numeroCible);
       // Envoie le message 'gagne' seulement à ce socket.
       socket.emit('gagne');
+      //Affiche le compteur de combo
+      socket.emit('combo')
     }
   });
 
