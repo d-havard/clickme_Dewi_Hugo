@@ -57,6 +57,30 @@ export class Partie {
         return this.joueurs.find((joueur) => joueur.socketId == socketId);
     }
 
+ ImplementationCompteurScore
+    /**
+     * Retourne le score du joueur ayant le s...;
+     * @param {string} socketId 
+     */
+    getScoreJoueur(socketId){
+        let joueur = this.getJoueurById(socketId);
+        return joueur.score;
+    }
+
+    getJoueur(socketId){
+        let joueur = this.getJoueurById(socketId);
+        return joueur.nom
+    }
+
+    /**
+     * Un joueur a cliqué sur la bonne cible
+     * @param {string} socketId 
+     */
+    gagne(socketId){
+        this.nouvelleCible();
+        let joueur = this.getJoueurById(socketId);
+        joueur.incrementeScore();
+
     changeNomJoueur(socketId, nouveauNom){
         let joueur = this.getJoueurById(socketId);
         if (!nouveauNom.includes(" "))
@@ -67,6 +91,7 @@ export class Partie {
             }
             
         }
+ main
     }
 }
 
@@ -85,9 +110,16 @@ class Joueur {
     constructor(socketId, nom){
         this.nom = nom;
         this.socketId = socketId;
+        this.score = 0;
     }
+ ImplementationCompteurScore
+
+    incrementeScore() {
+        this.score = this.score + 1;
+
     changeNom(nouveauNom){
         this.nom = nouveauNom;
+ main
     }
 }
 

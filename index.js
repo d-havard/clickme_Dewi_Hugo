@@ -34,13 +34,19 @@ io.on("connection", (socket) => {
   // On écoute des évènements sur le socket
   socket.on('click-cible',  (numeroCible) => {
     if (numeroCible == partie.numeroCible){
-      partie.nouvelleCible();
+      partie.gagne(socket.id);
+      
+      console.log(`Le score du joueur ${partie.getJoueur(socket.id)} est de ${partie.getScoreJoueur(socket.id)}`);
       // Envoie le message 'nouvelle-cible à tous les sockets.
       io.emit('nouvelle-cible', partie.numeroCible);
       // Envoie le message 'gagne' seulement à ce socket.
+ ImplementationCompteurScore
+      socket.emit('gagne', partie.getScoreJoueur(socket.id));
+
       socket.emit('gagne');
       //Affiche le compteur de combo
       socket.emit('combo')
+ main
     }
   });
 

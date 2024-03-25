@@ -1,6 +1,7 @@
 const socket = io();
 const jeuxDiv = document.getElementById('jeu');
 const gagneDiv = document.getElementById('gagne');
+const scoreDiv = document.getElementById('score')
 const joueursTable = document.getElementById('tableau-joueurs');
 const changementnomForm = document.getElementById('changerNomForm');
 const pseudoInput = document.getElementById('nomjoueur');
@@ -54,13 +55,18 @@ socket.on('nouvelle-cible', function(numeroCible){
     comboDiv.textContent = 0;
 });
 
+ ImplementationCompteurScore
+socket.on('gagne', function(getScoreJoueur){
+
 socket.on('combo', function(){
     combo++
     comboDiv.textContent = combo;
 })
 
 socket.on('gagne', function(){
+ main
     gagneDiv.textContent = "Gagné!";
+    scoreDiv.textContent = `Votre score est de ${getScoreJoueur}`
 });
 
 
