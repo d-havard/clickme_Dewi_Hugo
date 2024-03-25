@@ -50,6 +50,11 @@ io.on("connection", (socket) => {
     io.emit('maj-joueurs', partie.joueurs);
   });
 
+  socket.on('nom-joueur', (nouveauNom) =>{
+    partie.changeNomJoueur(socket.id, nouveauNom);
+    io.emit('maj-joueurs', partie.joueurs);
+  })
+
 });
 
 // Lance le serveur.
