@@ -2,6 +2,7 @@ const socket = io();
 const jeuxDiv = document.getElementById('jeu');
 const gagneDiv = document.getElementById('gagne');
 const scoreDiv = document.getElementById('score')
+const reactionDiv = document.getElementById('reaction')
 const joueursTable = document.getElementById('tableau-joueurs');
 
 // Gère le click sur une cible
