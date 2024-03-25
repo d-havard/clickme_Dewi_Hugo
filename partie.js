@@ -59,7 +59,14 @@ export class Partie {
 
     changeNomJoueur(socketId, nouveauNom){
         let joueur = this.getJoueurById(socketId);
-        joueur.changeNom(nouveauNom);
+        if (!nouveauNom.includes(" "))
+        {
+            if (nouveauNom != "")
+            {
+                joueur.changeNom(nouveauNom);
+            }
+            
+        }
     }
 }
 
