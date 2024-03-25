@@ -47,9 +47,10 @@ socket.on('nouvelle-cible', function(numeroCible){
     gagneDiv.textContent = "";
 });
 
-socket.on('gagne', function(getScoreJoueur){
+socket.on('gagne', function(getScoreJoueur, tempsReaction){
     gagneDiv.textContent = "Gagné!";
     scoreDiv.textContent = `Votre score est de ${getScoreJoueur}`
+    reactionDiv.textContent = `Votre temps de réaction est de ${tempsReaction}`
 });
 
 
