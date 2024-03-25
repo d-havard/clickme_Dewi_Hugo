@@ -4,6 +4,9 @@ const gagneDiv = document.getElementById('gagne');
 const scoreDiv = document.getElementById('score')
 const reactionDiv = document.getElementById('reaction')
 const joueursTable = document.getElementById('tableau-joueurs');
+var clickedTime; 
+var createdTime = (Date.now())/1000; 
+var reactionTime;
 
 // Gère le click sur une cible
 function clickCible(event){
@@ -23,7 +26,6 @@ socket.on('initialise', function(nombreCible){
         cible.classList.add('cible');
         // Ajoute l'attribut 'numeroCible' à la cible
         cible.setAttribute('numeroCible', i);
-
         jeuxDiv.append(cible)
         // Ecoute le click sur la cible
         cible.addEventListener('click', clickCible)
@@ -42,15 +44,20 @@ socket.on('nouvelle-cible', function(numeroCible){
     const cible = document.querySelector(`[numeroCible="${numeroCible}"]`);
 
     cible.classList.add('clickme');
-
+    
+    
     // Vide gagneDiv
     gagneDiv.textContent = "";
 });
 
-socket.on('gagne', function(getScoreJoueur, tempsReaction){
+socket.on('gagne', function(getScoreJoueur){
     gagneDiv.textContent = "Gagné!";
     scoreDiv.textContent = `Votre score est de ${getScoreJoueur}`
-    reactionDiv.textContent = `Votre temps de réaction est de ${tempsReaction}`
+    clickedTime=(Date.now())/1000;
+    reactionTime = clickedTime-createdTime;
+				
+	reactionDiv.textContent = "Your Reaction Time is: " + reactionTime + " seconds";
+    createdTime = clickedTime
 });
 
 
