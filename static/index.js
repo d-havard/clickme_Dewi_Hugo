@@ -4,6 +4,8 @@ const gagneDiv = document.getElementById('gagne');
 const joueursTable = document.getElementById('tableau-joueurs');
 const changementnomForm = document.getElementById('changerNomForm');
 const pseudoInput = document.getElementById('nomjoueur');
+const comboDiv = document.getElementById('combo')
+var combo = 0
 
 // Gère le click sur une cible
 function clickCible(event){
@@ -33,6 +35,9 @@ socket.on('initialise', function(nombreCible){
 socket.on('nouvelle-cible', function(numeroCible){
     // Enlève la classe clickme à l'ancienne cible
     const ancienneCible=document.querySelector('.clickme');
+    if (gagneDiv.textContent == ""){
+        combo = 0;
+    }
     // Attetion, à l'initialisation, ancienneCible n'existe pas!
     if ( ancienneCible ) {
         ancienneCible.classList.remove('clickme');
@@ -45,7 +50,14 @@ socket.on('nouvelle-cible', function(numeroCible){
 
     // Vide gagneDiv
     gagneDiv.textContent = "";
+    //remet à 0 le compteur de combo
+    comboDiv.textContent = 0;
 });
+
+socket.on('combo', function(){
+    combo++
+    comboDiv.textContent = combo;
+})
 
 socket.on('gagne', function(){
     gagneDiv.textContent = "Gagné!";
