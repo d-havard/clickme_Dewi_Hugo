@@ -40,13 +40,11 @@ io.on("connection", (socket) => {
       // Envoie le message 'nouvelle-cible à tous les sockets.
       io.emit('nouvelle-cible', partie.numeroCible);
       // Envoie le message 'gagne' seulement à ce socket.
- ImplementationCompteurScore
       socket.emit('gagne', partie.getScoreJoueur(socket.id));
 
       socket.emit('gagne');
       //Affiche le compteur de combo
       socket.emit('combo')
- main
     }
   });
 
@@ -55,6 +53,7 @@ io.on("connection", (socket) => {
     partie.supprimeJoueur(socket.id);
     io.emit('maj-joueurs', partie.joueurs);
   });
+  
 
   socket.on('nom-joueur', (nouveauNom) =>{
     partie.changeNomJoueur(socket.id, nouveauNom);

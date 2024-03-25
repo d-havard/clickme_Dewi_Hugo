@@ -5,8 +5,8 @@ const scoreDiv = document.getElementById('score')
 const joueursTable = document.getElementById('tableau-joueurs');
 const changementnomForm = document.getElementById('changerNomForm');
 const pseudoInput = document.getElementById('nomjoueur');
-const comboDiv = document.getElementById('combo')
-var combo = 0
+const comboDiv = document.getElementById('combo');
+var combo = 0;
 
 // Gère le click sur une cible
 function clickCible(event){
@@ -55,8 +55,9 @@ socket.on('nouvelle-cible', function(numeroCible){
     comboDiv.textContent = 0;
 });
 
- ImplementationCompteurScore
 socket.on('gagne', function(getScoreJoueur){
+    scoreDiv.textContent = `Votre score est de ${getScoreJoueur}`;
+})
 
 socket.on('combo', function(){
     combo++
@@ -64,7 +65,6 @@ socket.on('combo', function(){
 })
 
 socket.on('gagne', function(){
- main
     gagneDiv.textContent = "Gagné!";
     scoreDiv.textContent = `Votre score est de ${getScoreJoueur}`
 });
