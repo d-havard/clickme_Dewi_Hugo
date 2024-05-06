@@ -55,15 +55,13 @@ socket.on('nouvelle-cible', function(numeroCible){
     comboDiv.textContent = 0;
 });
 
- ImplementationCompteurScore
-socket.on('gagne', function(getScoreJoueur){
 
 socket.on('combo', function(){
     combo++
     comboDiv.textContent = combo;
 })
 
-socket.on('gagne', function(){
+socket.on('gagne', function(getScoreJoueur){
  main
     gagneDiv.textContent = "Gagné!";
     scoreDiv.textContent = `Votre score est de ${getScoreJoueur}`
