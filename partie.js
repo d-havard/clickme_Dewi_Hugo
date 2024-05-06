@@ -57,7 +57,6 @@ export class Partie {
         return this.joueurs.find((joueur) => joueur.socketId == socketId);
     }
 
- ImplementationCompteurScore
     /**
      * Retourne le score du joueur ayant le s...;
      * @param {string} socketId 
@@ -80,6 +79,7 @@ export class Partie {
         this.nouvelleCible();
         let joueur = this.getJoueurById(socketId);
         joueur.incrementeScore();
+    }
 
     changeNomJoueur(socketId, nouveauNom){
         let joueur = this.getJoueurById(socketId);
@@ -111,14 +111,13 @@ class Joueur {
         this.socketId = socketId;
         this.score = 0;
     }
- ImplementationCompteurScore
 
     incrementeScore() {
         this.score = this.score + 1;
-
+    }
+    
     changeNom(nouveauNom){
         this.nom = nouveauNom;
- main
     }
 }
 
