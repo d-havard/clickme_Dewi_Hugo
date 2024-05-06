@@ -43,8 +43,11 @@ io.on("connection", (socket) => {
       socket.emit('gagne', partie.getScoreJoueur(socket.id));
 
       socket.emit('gagne');
+
       //Affiche le compteur de combo
       socket.emit('combo')
+
+      socket.emit('maj-joueurs', partie.joueurs);
     }
   });
 
