@@ -55,16 +55,14 @@ socket.on('nouvelle-cible', function(numeroCible){
     comboDiv.textContent = 0;
 });
 
- ImplementationCompteurScore
-socket.on('gagne', function(getScoreJoueur){
+//socket.on('gagne', function(getScoreJoueur){
 
 socket.on('combo', function(){
     combo++
     comboDiv.textContent = combo;
 })
 
-socket.on('gagne', function(){
- main
+socket.on('gagne', function(getScoreJoueur){
     gagneDiv.textContent = "Gagné!";
     scoreDiv.textContent = `Votre score est de ${getScoreJoueur}`
 });
@@ -81,6 +79,6 @@ socket.on('maj-joueurs',function (joueurs){
 
 changementnomForm.addEventListener('submit', function(event){
     event.preventDefault();
-    console.log('coucou')
+    console.log('coucou');
     socket.emit('nom-joueur', pseudoInput.value);
 })
