@@ -4,6 +4,10 @@ const gagneDiv = document.getElementById('gagne');
 const scoreDiv = document.getElementById('score')
 const reactionDiv = document.getElementById('reaction')
 const joueursTable = document.getElementById('tableau-joueurs');
+const changementnomForm = document.getElementById('changerNomForm');
+const pseudoInput = document.getElementById('nomjoueur');
+const comboDiv = document.getElementById('combo')
+var combo = 0
 var clickedTime; 
 var createdTime = (Date.now())/1000; 
 var reactionTime;
@@ -35,6 +39,9 @@ socket.on('initialise', function(nombreCible){
 socket.on('nouvelle-cible', function(numeroCible){
     // Enlève la classe clickme à l'ancienne cible
     const ancienneCible=document.querySelector('.clickme');
+    if (gagneDiv.textContent == ""){
+        combo = 0;
+    }
     // Attetion, à l'initialisation, ancienneCible n'existe pas!
     if ( ancienneCible ) {
         ancienneCible.classList.remove('clickme');
@@ -48,11 +55,20 @@ socket.on('nouvelle-cible', function(numeroCible){
     
     // Vide gagneDiv
     gagneDiv.textContent = "";
+    //remet à 0 le compteur de combo
+    comboDiv.textContent = 0;
 });
+
+//socket.on('gagne', function(getScoreJoueur){
+
+socket.on('combo', function(){
+    combo++
+    comboDiv.textContent = combo;
+})
 
 socket.on('gagne', function(getScoreJoueur){
     gagneDiv.textContent = "Gagné!";
-    scoreDiv.textContent = `Votre score est de ${getScoreJoueur}`
+    joueur.score += 1;
     clickedTime=(Date.now())/1000;
     reactionTime = clickedTime-createdTime;
 				
@@ -67,5 +83,13 @@ socket.on('maj-joueurs',function (joueurs){
         const ligne = joueursTable.insertRow();
         let nomTd = ligne.insertCell();
         nomTd.textContent = joueur.nom;
+        let scoreTd = ligne.insertCell();
+        scoreTd.textContent = joueur.score;
+        scoreDiv.textContent = `Votre score est de ${joueur.score}`;
     }
 });
+
+changementnomForm.addEventListener('submit', function(event){
+    event.preventDefault();
+    socket.emit('nom-joueur', pseudoInput.value);
+})

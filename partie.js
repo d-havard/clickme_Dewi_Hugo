@@ -57,6 +57,7 @@ export class Partie {
         return this.joueurs.find((joueur) => joueur.socketId == socketId);
     }
 
+
     /**
      * Retourne le score du joueur ayant le s...;
      * @param {string} socketId 
@@ -80,6 +81,19 @@ export class Partie {
         let joueur = this.getJoueurById(socketId);
         joueur.incrementeScore();
     }
+    
+
+    changeNomJoueur(socketId, nouveauNom){
+        let joueur = this.getJoueurById(socketId);
+        if (!nouveauNom.includes(" "))
+        {
+            if (nouveauNom != "")
+            {
+                joueur.changeNom(nouveauNom);
+            }
+            
+        }
+    }
 }
 
 
@@ -90,6 +104,8 @@ export class Partie {
  * ├──────────────────┤
  * │ - nom            │
  * │ - socketId       │
+ * │ - score          │
+ * │ - temps de reac  │
  * ├──────────────────┤
  * └──────────────────┘
  */
@@ -98,10 +114,16 @@ class Joueur {
         this.nom = nom;
         this.socketId = socketId;
         this.score = 0;
+        this.tempsReaction = 0;
     }
 
     incrementeScore() {
         this.score = this.score + 1;
+    }
+    
+    
+    changeNom(nouveauNom){
+        this.nom = nouveauNom;
     }
 }
 

@@ -41,6 +41,13 @@ io.on("connection", (socket) => {
       io.emit('nouvelle-cible', partie.numeroCible);
       // Envoie le message 'gagne' seulement à ce socket.
       socket.emit('gagne', partie.getScoreJoueur(socket.id));
+
+      socket.emit('gagne');
+
+      //Affiche le compteur de combo
+      socket.emit('combo')
+
+      socket.emit('maj-joueurs', partie.joueurs);
     }
   });
 
@@ -49,6 +56,11 @@ io.on("connection", (socket) => {
     partie.supprimeJoueur(socket.id);
     io.emit('maj-joueurs', partie.joueurs);
   });
+
+  socket.on('nom-joueur', (nouveauNom) =>{
+    partie.changeNomJoueur(socket.id, nouveauNom);
+    io.emit('maj-joueurs', partie.joueurs);
+  })
 
 });
 
