@@ -38,3 +38,8 @@ body{
     display: flex;
     justify-content: space-between;
 }
+
+#joueur{
+    font-size: 25px;
+    color: blueviolet;
+}

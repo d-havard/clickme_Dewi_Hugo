@@ -72,6 +72,9 @@ socket.on('maj-joueurs',function (joueurs){
     joueursTable.innerHTML = '';
     for(const joueur of joueurs){
         const ligne = joueursTable.insertRow();
+        if (joueur.socketId == socket.id){
+            ligne.id ='joueur';
+        }
         let nomTd = ligne.insertCell();
         nomTd.textContent = joueur.nom;
     }
@@ -82,3 +85,4 @@ changementnomForm.addEventListener('submit', function(event){
     console.log('coucou');
     socket.emit('nom-joueur', pseudoInput.value);
 })
+
