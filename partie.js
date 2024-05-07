@@ -105,7 +105,6 @@ export class Partie {
  * │ - nom            │
  * │ - socketId       │
  * │ - score          │
- * │ - temps de reac  │
  * ├──────────────────┤
  * └──────────────────┘
  */

@@ -66,14 +66,15 @@ socket.on('combo', function(){
     comboDiv.textContent = combo;
 })
 
-socket.on('gagne', function(getScoreJoueur){
+socket.on('gagne', function(){
     gagneDiv.textContent = "Gagné!";
-    joueur.score += 1;
+    console.log('bonjour');
     clickedTime=(Date.now())/1000;
     reactionTime = clickedTime-createdTime;
-				
-	reactionDiv.textContent = "Your Reaction Time is: " + reactionTime + " seconds";
-    createdTime = clickedTime
+    reactionTime = reactionTime.toFixed(3)
+	reactionDiv.textContent = "Tu as cliqué en " + reactionTime + " secondes";
+    createdTime = clickedTime;
+    joueur.score += 1;
 });
 
 
@@ -85,7 +86,6 @@ socket.on('maj-joueurs',function (joueurs){
         nomTd.textContent = joueur.nom;
         let scoreTd = ligne.insertCell();
         scoreTd.textContent = joueur.score;
-        scoreDiv.textContent = `Votre score est de ${joueur.score}`;
     }
 });
 
