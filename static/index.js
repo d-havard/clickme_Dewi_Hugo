@@ -64,7 +64,7 @@ socket.on('combo', function(){
 
 socket.on('gagne', function(getScoreJoueur){
     gagneDiv.textContent = "Gagné!";
-    scoreDiv.textContent = `Votre score est de ${getScoreJoueur}`
+    joueur.score += 1;
 });
 
 
@@ -74,11 +74,13 @@ socket.on('maj-joueurs',function (joueurs){
         const ligne = joueursTable.insertRow();
         let nomTd = ligne.insertCell();
         nomTd.textContent = joueur.nom;
+        let scoreTd = ligne.insertCell();
+        scoreTd.textContent = joueur.score;
+        scoreDiv.textContent = `Votre score est de ${joueur.score}`;
     }
 });
 
 changementnomForm.addEventListener('submit', function(event){
     event.preventDefault();
-    console.log('coucou');
     socket.emit('nom-joueur', pseudoInput.value);
 })
