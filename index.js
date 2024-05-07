@@ -41,13 +41,10 @@ io.on("connection", (socket) => {
       io.emit('nouvelle-cible', partie.numeroCible);
       // Envoie le message 'gagne' seulement à ce socket.
       socket.emit('gagne', partie.getScoreJoueur(socket.id));
-
-      socket.emit('gagne');
-
       //Affiche le compteur de combo
-      socket.emit('combo')
+      socket.emit('combo', partie.getComboJoueur(socket.id));
 
-      socket.emit('maj-joueurs', partie.joueurs);
+      io.emit('maj-joueurs', partie.joueurs);
     }
   });
 
