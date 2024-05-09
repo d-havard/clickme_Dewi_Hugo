@@ -76,7 +76,6 @@ socket.on('maj-joueurs',function (joueurs){
         nomTd.textContent = joueur.nom;
         let scoreTd = ligne.insertCell();
         scoreTd.textContent = joueur.score;
-        scoreDiv.textContent = `Votre score est de ${joueur.score}`;
     }
 });
 
