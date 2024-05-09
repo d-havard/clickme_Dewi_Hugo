@@ -137,6 +137,7 @@ class Joueur {
         this.socketId = socketId;
         this.score = 0;
         this.combo = 0;
+        this.tempsReaction = 0;
     }
 
     incrementeScore() {
