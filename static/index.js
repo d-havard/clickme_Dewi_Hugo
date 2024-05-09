@@ -2,11 +2,15 @@ const socket = io();
 const jeuxDiv = document.getElementById('jeu');
 const gagneDiv = document.getElementById('gagne');
 const scoreDiv = document.getElementById('score')
+const reactionDiv = document.getElementById('reaction')
 const joueursTable = document.getElementById('tableau-joueurs');
 const changementnomForm = document.getElementById('changerNomForm');
 const pseudoInput = document.getElementById('nomjoueur');
 const comboDiv = document.getElementById('combo')
 var combo = 0
+var clickedTime; 
+var createdTime = (Date.now())/1000; 
+var reactionTime;
 
 // Gère le click sur une cible
 function clickCible(event){
@@ -26,7 +30,6 @@ socket.on('initialise', function(nombreCible){
         cible.classList.add('cible');
         // Ajoute l'attribut 'numeroCible' à la cible
         cible.setAttribute('numeroCible', i);
-
         jeuxDiv.append(cible)
         // Ecoute le click sur la cible
         cible.addEventListener('click', clickCible)
@@ -48,7 +51,8 @@ socket.on('nouvelle-cible', function(numeroCible){
     const cible = document.querySelector(`[numeroCible="${numeroCible}"]`);
 
     cible.classList.add('clickme');
-
+    
+    
     // Vide gagneDiv
     gagneDiv.textContent = "";
     //remet à 0 le compteur de combo
@@ -62,8 +66,14 @@ socket.on('combo', function(){
     comboDiv.textContent = combo;
 })
 
-socket.on('gagne', function(getScoreJoueur){
+socket.on('gagne', function(){
     gagneDiv.textContent = "Gagné!";
+    console.log('bonjour');
+    clickedTime=(Date.now())/1000;
+    reactionTime = clickedTime-createdTime;
+    reactionTime = reactionTime.toFixed(3)
+	reactionDiv.textContent = "Tu as cliqué en " + reactionTime + " secondes";
+    createdTime = clickedTime;
     joueur.score += 1;
 });
 
@@ -76,7 +86,6 @@ socket.on('maj-joueurs',function (joueurs){
         nomTd.textContent = joueur.nom;
         let scoreTd = ligne.insertCell();
         scoreTd.textContent = joueur.score;
-        scoreDiv.textContent = `Votre score est de ${joueur.score}`;
     }
 });
 
