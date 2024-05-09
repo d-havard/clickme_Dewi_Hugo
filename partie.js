@@ -59,14 +59,28 @@ export class Partie {
 
 
     /**
-     * Retourne le score du joueur ayant le s...;
+     * Retourne le score du joueur par rapport à l'id du socket
      * @param {string} socketId 
      */
     getScoreJoueur(socketId){
         let joueur = this.getJoueurById(socketId);
         return joueur.score;
     }
+    
+    /**
+     * Retourne le combo d'un joueur par rapport à l'id du socket
+     * @param {string} socketId 
+     */
+    getComboJoueur(socketId){
+        let joueur = this.getJoueurById(socketId);
+        return joueur.combo;
+    }
 
+    /**
+     * Retourne un joueur par rapport à l'id du socket
+     * @param {string} socketId 
+     * @returns 
+     */
     getJoueur(socketId){
         let joueur = this.getJoueurById(socketId);
         return joueur.nom
@@ -78,10 +92,19 @@ export class Partie {
      */
     gagne(socketId){
         this.nouvelleCible();
-        let joueur = this.getJoueurById(socketId);
-        joueur.incrementeScore();
+        let leJoueur = this.getJoueurById(socketId);
+        leJoueur.incrementeScore();
+        leJoueur.incrementeCombo();
+        //mettre les autres joueurs à 0
+        for (const unJoueur of this.joueurs){
+            //if unjoueur != lejouer: unjoueur.reinitialiserCombo
+            if (unJoueur != leJoueur){
+                unJoueur.reinitialiserCombo();
+            }   
+            console.log(unJoueur.combo);
+        }
+
     }
-    
 
     changeNomJoueur(socketId, nouveauNom){
         let joueur = this.getJoueurById(socketId);
@@ -113,6 +136,7 @@ class Joueur {
         this.nom = nom;
         this.socketId = socketId;
         this.score = 0;
+        this.combo = 0;
         this.tempsReaction = 0;
     }
 
@@ -123,6 +147,14 @@ class Joueur {
     
     changeNom(nouveauNom){
         this.nom = nouveauNom;
+    }
+
+    incrementeCombo() {
+        this.combo = this.combo + 1;
+    }
+
+    reinitialiserCombo(){
+        this.combo = 0;
     }
 }
 
